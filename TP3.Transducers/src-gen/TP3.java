@@ -82,11 +82,11 @@ public final class TP3 {
     Object $result=null;
     $try:try {
       $line=44;
-      Object Q=$fix($opUnionY(GCollections.asSet("I","K","E","o","f","s","S","T","P","q","R","N"),GCollections.asSet("error")));
+      Object Q=$fix($opUnionY(GCollections.asSet("I","K","E","o","f","s","S","T","P","q","R","N"),GCollections.asSet("ERROR","Init")));
       $line=46;
       Object \u03A3=$fix($opUnionY($opUnionY($opUnionY($opIntvlY('A','Z'),$opIntvlY('a','z')),$opIntvlY('0','9')),GCollections.asSet('(',')',',','_',' ',';')));
       $line=47;
-      Object Out=$fix(GCollections.asSet("Cla","Ext","obj","f","s","Pair","Sup","Th","M","R","N"));
+      Object Out=$fix(GCollections.asSet('C','l','a','E','x','t','o','b','j','f','s','P','a','i','r','S','u','p','T','h','M','R','N'));
       $line=48;
       Object q=$fix("Init");
       $line=49;
@@ -196,84 +196,84 @@ public final class TP3 {
               $line=91;
               if ($opEqualY(q,"K")) {
                 $line=91;
-                $result="Cla";
+                $result=$opAdditY($opAdditY('C','l'),'a');
                 if (true) break $try;
               }
               else {
                 $line=93;
                 if ($opEqualY(q,"E")) {
                   $line=93;
-                  $result="Ext";
+                  $result=$opAdditY($opAdditY('E','x'),'t');
                   if (true) break $try;
                 }
                 else {
                   $line=95;
                   if ($opEqualY(q,"o")) {
                     $line=95;
-                    $result=$opAdditY("obj",s);
+                    $result=$opAdditY($opAdditY($opAdditY('o','b'),'j'),s);
                     if (true) break $try;
                   }
                   else {
                     $line=97;
                     if ($opEqualY(q,"f")) {
                       $line=97;
-                      $result=$opAdditY("f",s);
+                      $result=$opAdditY('f',s);
                       if (true) break $try;
                     }
                     else {
                       $line=99;
                       if ($opEqualY(q,"s")) {
                         $line=99;
-                        $result=$opAdditY("s",s);
+                        $result=$opAdditY('s',s);
                         if (true) break $try;
                       }
                       else {
                         $line=101;
                         if ($opEqualY(q,"S")) {
                           $line=101;
-                          $result=$opAdditY("Sup",s);
+                          $result=$opAdditY($opAdditY($opAdditY('S','u'),'p'),s);
                           if (true) break $try;
                         }
                         else {
                           $line=103;
                           if ($opEqualY(q,"T")) {
                             $line=103;
-                            $result=$opAdditY("Th",s);
+                            $result=$opAdditY($opAdditY('T','h'),s);
                             if (true) break $try;
                           }
                           else {
                             $line=105;
                             if ($opEqualY(q,"P")) {
                               $line=105;
-                              $result=$opAdditY("Pair",s);
+                              $result=$opAdditY($opAdditY($opAdditY($opAdditY('P','a'),'i'),'r'),s);
                               if (true) break $try;
                             }
                             else {
                               $line=107;
                               if ($opEqualY(q,"q")) {
                                 $line=107;
-                                $result=$opAdditY("q",s);
+                                $result=$opAdditY('q',s);
                                 if (true) break $try;
                               }
                               else {
                                 $line=109;
                                 if ($opEqualY(q,"N")) {
                                   $line=109;
-                                  $result=$opAdditY("new",s);
+                                  $result=$opAdditY($opAdditY($opAdditY('n','e'),'w'),s);
                                   if (true) break $try;
                                 }
                                 else {
                                   $line=111;
                                   if ($opEqualY(q,"R")) {
                                     $line=111;
-                                    $result="Return";
+                                    $result=$opAdditY($opAdditY($opAdditY($opAdditY($opAdditY('R','e'),'t'),'u'),'r'),'n');
                                     if (true) break $try;
                                   }
                                   else {
                                     $line=113;
                                     if ($opEqualY(q,"N")) {
                                       $line=113;
-                                      $result=$opAdditY("new",s);
+                                      $result=$opAdditY($opAdditY($opAdditY('n','e'),'w'),s);
                                       if (true) break $try;
                                     }
                                     else {

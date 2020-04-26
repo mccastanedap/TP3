@@ -41,10 +41,10 @@ var names
 function createTransducer():ITransducer begin
 	// Lexer: reads a string with lower casae letters, digits, parenthesis, and spaces.
 	// outputs a string of {'(',')','+','*','v','n'}
-Q:={"I","K","E","o","f","s","S","T","P","q","R","N"}∪{"error"} 
+Q:={"I","K","E","o","f","s","S","T","P","q","R","N"}∪{"ERROR", "Init"} 
 
 Σ:=('A'‥'Z')∪('a'‥'z')∪('0'‥'9')∪{'(',')',',','_',' ',';'}
-Out:={"Cla", "Ext", "obj", "f", "s", "Pair", "Sup", "Th", "M", "R","N"}
+Out:={'C','l','a', 'E','x','t', 'o','b','j', 'f', 's', 'P','a','i','r', 'S','u','p', 'T','h', 'M', 'R','N'}
 q:="Init"
 F:={"Init"}∪{"ERROR"}
  
@@ -88,29 +88,29 @@ function h(q,σ) begin
 			
 			if q=="Init" then return s
 				
-			elseif q=="K" then return "Cla"
+			elseif q=="K" then return 'C'+'l'+'a'
 				
-			elseif q=="E" then return "Ext"
+			elseif q=="E" then return 'E'+'x'+'t'
 				
-			elseif q=="o" then return "obj"+s
+			elseif q=="o" then return 'o'+'b'+'j'+s
 				
-			elseif q=="f" then return "f"+s
+			elseif q=="f" then return 'f'+s
 				
-			elseif q=="s" then return "s"+s
+			elseif q=="s" then return 's'+s
 				
-			elseif q=="S" then return "Sup"+s
+			elseif q=="S" then return 'S'+'u'+'p'+s
 				
-			elseif q=="T" then return "Th"+s
+			elseif q=="T" then return 'T'+'h'+s
 				
-			elseif q=="P" then return "Pair"+s
+			elseif q=="P" then return 'P'+'a'+'i'+'r'+s
 				
-			elseif q=="q" then return "q"+s	
+			elseif q=="q" then return 'q'+s	
 				
-			elseif q=="N" then return "new"+s	
+			elseif q=="N" then return 'n'+'e'+'w'+s	
 				
-			elseif q=="R" then return "Return"
+			elseif q=="R" then return 'R'+'e'+'t'+'u'+'r'+'n'
 				
-			elseif q=="N" then return "new"+s		
+			elseif q=="N" then return 'n'+'e'+'w'+s		
 				
 			else return "v"+s
 				

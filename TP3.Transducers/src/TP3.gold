@@ -1,371 +1,92 @@
-using gold.**
+using gold.structures.automaton.*
+using gold.visualization.automaton.*
 
 procedure main(args:String[]) begin
-	Lexer = createTransducer()
-	 GAutomataFrame.show(Lexer)
-     testParser(Lexer)
-end    
+    lexer = createTransducer()
+	 testLexer(lexer)
+end
+  
+        
 
-procedure testParser(M:ITransducer,P:IAutomaton) begin
-	// M  is the lexer
-	
-
-   var sc:java.util.Scanner(System.$in)
-   var input : String
-   var line : String
+procedure testLexer(M:ITransducer) begin
+	var sc:java.util.Scanner(System.$in)
 	
 	while true do
-      	input := ""
-       print "----------------------------"
-		print "Input the program code and  end with a blank line" 
-		while (sc.hasNextLine()) do
-		 	line:=sc.nextLine()  
-		 	if line.isEmpty() then
-	        	break
-	     	end
-        	input =  input + line
-      	end
-		
-		result:=M.acceptsString(input)    
-		
-		tokenStream := M.getOutputString()
-		
-		print "The LEXER "+(result?"accepted":"rejected")+" the innput string."
-		if result then
-	   		print  "Resulting tokenStream: "+tokenStream
-			result:=P.acceptsString(tokenStream )  //  The parser analyzes the tokenStream
-			print "The PARSER "+(result?"accepted":"rejected")+" the token stream."
+		print "----------------------------"
+		print "Enter an input string: "
+		string:=""
+		cond:=true
+		while cond==true do
+			a:= sc.nextLine().toString()
+			if(a!="") then 
+				string:=string+a+" "   //We add a space (which is also a separator to the end of the string)
+			else
+				cond=false
+				print string
+			end
+			
 		end
+		result:=M.acceptsString(string)    
+			tokenStream := M.getOutputString()
+			print "The lexer did "+(result?"":"not ")+" accept the string."
+			if result then print "Token Stream: "+ tokenStream end		
 	end
-end 
+end
 
+ 
+
+
+var names
+  
 function createTransducer():ITransducer begin
-	
+	// Lexer: reads a string with lower casae letters, digits, parenthesis, and spaces.
+	// outputs a string of {'(',')','+','*','v','n'}
 Q:={"I","K","E","o","f","s","S","T","P","q","R","N"}∪{"error"} 
 
-S:=('A'‥'Z')∪('a'‥'z')∪('0'‥'9')∪{'(',')',',','_',' ',';'}
+Σ:=('A'‥'Z')∪('a'‥'z')∪('0'‥'9')∪{'(',')',',','_',' ',';'}
 Out:={"Cla", "Ext", "obj", "f", "s", "Pair", "Sup", "Th", "M", "R","N"}
-q:="I"
-F:={"I"}∪{"END"}
+q:="Init"
+F:={"Init"}∪{"ERROR"}
  
-	return GDeterministicTransducer(Q,S,Out,q,F,d,g,h)
+	return GDeterministicTransducer(Q,Σ,Out,q,F,δ,g,h)
+end
+
+function δ(q,σ) begin
+	if (q = "ERROR") then return "ERROR"
+	elseif  σ ∈ {'(',')',' ', '\n' , ',' , '\t' , ';' } then return "Init"
+			
+	elseif (q="Init" or q="K" or q="E" or q="o" or q="f" or q="s" or q="S" or q="T" or
+		q="P" or q="q" or q="R" or	q="N" ) and σ ∈ {'\n','\t',' '}
+		then return "Init"
+			
+
 	
-		end
-function d(q,s) begin
-	
-	if  s ∈ {'('  ,')'  ,' ',  ',', '\n', '\t',';'} then return "I"	
-		
-	elseif q=="error" then return "error"
-		
-	elseif s=='R' and q=="I" then return "R" 
-		
-	elseif s=='O' and q=="R"  then return "RO"
-		
-	elseif s=='B' and q=="RO"  then return "ROB"	
-		
-	elseif s=='O' and q=="ROB"  then return "ROBO"
-		
-	elseif s=='T'  and q=="ROBO"  then return "ROBOT"
-		
-	elseif s=='_' and q=="ROBOT"  then return "ROBOT_"
-		
-	elseif s=='R' and q=="ROBOT_"  then return "ROBOT_R"
-		
-	elseif q=="ROBOT_R" then return "I"
-		
-		
-	elseif s=='V' and q=="I"  then return "V"
-		
-	elseif s=='A' and q=="V"  then return "VA"
-		 
-	elseif s=='R' and q=="VA"  then return "VAR"
-			
-	elseif s=='S' and q=="VAR"  then return "VARS"
-		
-	elseif q=="VARS" then return "I"
-		
-		
-	elseif s=='B' and q=="I"  then return "B"
-						
-	elseif s=='E' and q=="B"  then return "BE"
-		
-	elseif s=='G' and q=="BE"  then return "BEG"
-		
-	elseif s=='I' and q=="BEG"  then return "BEGI"
-			
-	elseif s=='N' and q=="BEGI"  then return "BEGIN"
-		
-	elseif q=="BEGIN" then return "I"
-		
-	elseif s=='E'  and q=="I"then return "E"
-		
-	elseif s=='N' and q=="E" then return "EN"
-		
-	elseif s=='D' and q=="EN"then return "END"
-			
-			
-	elseif s=='F' and q=="I"  then return "F"
-			
-	elseif s=='a' and q=="F"  then return "Fa"
-		
-		elseif s=='c' and q=="Fa"  then return "Fac"
-		
-		elseif s=='e' and q=="Fac"  then return "Face"
-			
-		elseif q=="Face" then return "I"
-			
-					
-		elseif s=='T' and q=="I"  then return "T"
-		
-		elseif s=='u' and q=="T"  then return "Tu"
-			
-		elseif s=='r' and q=="Tu"  then return "Tur"
-			
-		elseif s=='n' and q=="Tur"  then return "Turn"
-			
-		elseif q=="Turn" then return "I"
-			
-		
-			
-	elseif s=='A' and q=="I"  then return "A"
-		
-		elseif s=='s' and q=="A"  then return "As"
-			
-		elseif s=='s' and q=="As"  then return "Ass"	
-		
-		elseif s=='i' and q=="Ass"  then return "Assi"
-			
-		elseif s=='g' and q=="Assi"  then return "Assig"
-			
-		elseif s=='n' and q=="Assig"  then return "Assign"
-			
-		elseif q=="Assign" then return "I"
-			
-			
-	elseif s=='P' and q=="I"then return "P"
-		
-	elseif s=='i' and q=="P" then return "Pi"
-		
-	elseif s=='c' and q=="Pi"then return "Pic"
-		
-	elseif s=='k' and q=="Pic" then return "Pick"
-		
-	elseif q=="Pick" then return "I"
-		
-	
-	elseif s=='P' and q=="I" then return "P"
-		
-	elseif s=='u'and q=="P" then return "Pu"
-		
-	elseif s=='t' and q=="Pu" then return "Put"
-		
-	elseif q=="Put" then return "I"
-		
-	
-	elseif s=='M'and q=="I" then return "M"
-		
-	elseif s=='o' and q=="M" then return "Mo"
-		
-	elseif s=='v' and q=="Mo" then return "Mov"
-		
-	elseif s=='e'and q=="Mov" then return "Move"
-		
-	elseif s=='D' and q=="Move" then return "MoveD"
-	
-	elseif q=="Move" then return "I"
-		
-	elseif s=='i' and q=="MoveD"then return "MoveDi"
-		
-	elseif s=='r'and q=="MoveDi" then return "MoveDir"
-		
-	elseif q=="MoveDir" then return "I"
-		
-		
-	elseif s=='r'  and q=="I"then return "r"
-		
-	elseif s=='i' and q=="r" then return "ri"
-		
-	elseif s=='g' and q=="ri"then return "rig"
-		
-	elseif s=='h'and q=="rig" then return "righ"
-		
-	elseif s=='t'and q=="righ" then return "right"
-		
-	elseif q=="right" then return "I"
-		
-		
-	elseif s=='l'  and q=="I"then return "l"
-		
-	elseif s=='e' and q=="l" then return "le"
-		
-	elseif s=='f' and q=="le"then return "lef"
-		
-	elseif s=='t'and q=="lef" then return "left"
-				
-	elseif q=="left" then return "I"
-		
-	
-	elseif s=='a'  and q=="I"then return "a"
-		
-	elseif s=='r' and q=="a" then return "ar"
-		
-	elseif s=='o' and q=="ar"then return "aro"
-		
-	elseif s=='u'and q=="aro" then return "arou"
-		
-	elseif s=='n'and q=="arou" then return "aroun"
-		
-	elseif s=='d'and q=="aroun" then return "around"
-		
-	elseif q=="around" then return "I"
-		
-	
-	elseif s=='n'  and q=="I"then return "n"
-		
-	elseif s=='o' and q=="n" then return "no"
-		
-	elseif s=='r' and q=="no"then return "nor"
-		
-	elseif s=='t'and q=="nor" then return "nort"
-		
-	elseif s=='h'and q=="nort" then return "north"
-		
-	elseif q=="north" then return "I"
-		
-		
-	elseif s=='s'  and q=="I"then return "s"
-		
-	elseif s=='o' and q=="s" then return "so"
-		
-	elseif s=='u' and q=="so"then return "sou"
-		
-	elseif s=='t'and q=="sou" then return "sout"
-		
-	elseif s=='h'and q=="sout" then return "south"
-		
-	elseif q=="south" then return "I"
-		
-		
-	elseif s=='w'  and q=="I"then return "w"
-		
-	elseif s=='e' and q=="w" then return "we"
-		
-	elseif s=='s' and q=="we"then return "wes"
-		
-	elseif s=='t'and q=="wes" then return "west"
-				
-	elseif q=="west" then return "I"
-		
-		
-	elseif s=='e'  and q=="I"then return "e"
-		
-	elseif s=='a' and q=="e" then return "ea"
-		
-	elseif s=='s' and q=="ea"then return "eas"
-		
-	elseif s=='t'and q=="eas" then return "east"
-				
-	elseif q=="east" then return "I"
-		
-		
-	elseif s=='f'  and q=="I"then return "f"
-		
-	elseif s=='r' and q=="f" then return "fr"
-		
-	elseif s=='o' and q=="fr"then return "fro"
-		
-	elseif s=='n'and q=="fro" then return "fron"
-		
-	elseif s=='t'and q=="fron" then return "front"
-		
-	elseif q=="front" then return "I"
-		
-		
-	elseif s=='b'  and q=="I"then return "b"
-		
-	elseif s=='a' and q=="b" then return "ba"
-		
-	elseif s=='c' and q=="ba"then return "bac"
-		
-	elseif s=='k'and q=="bac" then return "back"
-				
-	elseif q=="back" then return "I"
-		
-		
-	elseif s=='B'  and q=="I"then return "B"
-		
-	elseif s=='a' and q=="B" then return "Ba"
-		
-	elseif s=='l' and q=="Ba"then return "Bal"
-		
-	elseif s=='l'and q=="Bal" then return "Ball"
-		
-	elseif s=='o'and q=="Ball" then return "Ballo"
-		
-	elseif s=='o' and q=="Ballo" then return "Balloo"
-		
-	elseif s=='n'and q=="Balloo" then return "Balloon"
-		
-	elseif s=='s'and q=="Balloon" then return "Balloons"
-		
-	elseif q=="Balloons" then return "I"
-		
-		
-	elseif s=='C'  and q=="I"then return "C"
-		
-	elseif s=='h' and q=="C" then return "Ch"
-		
-	elseif s=='i' and q=="Ch"then return "Chi"
-		
-	elseif s=='p'and q=="Chi" then return "Chip"
-		
-	elseif s=='s'and q=="Chip" then return "Chips"
-		
-	elseif q=="Chips" then return "I"
-		
-		
-	elseif s=='S'  and q=="I"then return "S"
-		
-	elseif s=='k' and q=="S" then return "Sk"
-		
-	elseif s=='i' and q=="Sk"then return "Ski"
-		
-	elseif s=='p'and q=="Ski" then return "Skip"
-		
-	elseif q=="Skip" then return "I"
-		
-	
-	elseif q="I" and s ∈ ('0' ‥ '9') then return "Num"
-	elseif	q="Num" and s ∈ ('0' ‥ '9') then return "Num"
-	elseif q=="Num" then return "I"	
-		
-	elseif q="I" and s ∈ ('a' ‥ 'z') then return "Nombre"
-	elseif q="Nombre" and s ∈ ('a' ‥ 'z') then return "Nombre"
-	elseif q=="Nombre" then return "I"
-			
-	else return "I"
+	else return "ERROR"
 		
 	end
 	
+end 
+
+
+
+function g(q) begin
+	return λ
 end
-	function g(q) begin
-		if q=="END" then return 'E'
-			
-		else return λ
-			
-		end
-end
+
 
 function h(q,σ) begin
 		var s: String
 		s:= λ
 		
-		if q=="Error" then return s
+		if q=="ERROR" then return "$"
+		else if σ==':' then return String.valueOf(λ)
 			
-		elseif σ∈{'(',')',' ',',','\n','\t',';', '{', '}','=', ":=", '.'} then
+		elseif σ∈{' ',',','\n','\t',';',':', ' '} then
 			if σ∉{' ','\n','\t'} then s:=String.valueOf(σ) end
-				
-			if q=="I" then return s
+			
+			
+			
+			if q=="Init" then return s
 				
 			elseif q=="K" then return "Cla"
 				
@@ -399,3 +120,5 @@ function h(q,σ) begin
 			
 		end
 end
+end
+

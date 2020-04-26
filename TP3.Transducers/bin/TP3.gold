@@ -1,18 +1,14 @@
 using gold.**
-// Juan Sebastian Jordan 201819968
-// 
-//Juan Jose Peña 201814669
+
 procedure main(args:String[]) begin
 	Lexer = createTransducer()
-	Parser = createAutomaton()
 	 GAutomataFrame.show(Lexer)
-    GAutomataFrame.show(Parser)
-     testParser(Lexer,Parser)
+     testParser(Lexer)
 end    
 
 procedure testParser(M:ITransducer,P:IAutomaton) begin
 	// M  is the lexer
-	// P is the parser
+	
 
    var sc:java.util.Scanner(System.$in)
    var input : String
@@ -43,114 +39,12 @@ procedure testParser(M:ITransducer,P:IAutomaton) begin
 	end
 end 
 
-function createAutomaton() begin
-	Q:=1‥32
-	S:={')','(','R','V','B','A','m','t','F',',',';','p','P','M','E','N',
-	'n','v','a','f','o','s','w','e','r','l','b','L','C','K'}
-	q:=1
-	F:={30}
-	Δ:=⟦
-		⟦1,'R',2⟧,
- 		⟦2,'V',3⟧,
- 		⟦3,'N',4⟧,
- 		⟦3,'v',4⟧,
- 		⟦4,'N',4⟧,
- 		⟦4,'v',4⟧,
-		⟦4,'n',4⟧,
-		⟦4,',',3⟧,
- 		⟦4,'B',5⟧,
- 		⟦2,'B',5⟧,
- 		⟦5,'K',29⟧,
- 		⟦29,';',5⟧,
- 		⟦29,'E',30⟧,
- 		⟦5,'t',6⟧,
- 		⟦6,'(',7⟧,
- 		⟦7,'l',8⟧,
- 		⟦7,'r',8⟧,
- 		⟦7,'a',8⟧,
- 		⟦8,')',29⟧,
- 		⟦5,'F',9⟧,
- 		⟦9,'(',10⟧,
- 		⟦10,'o',11⟧,
- 		⟦10,'w',11⟧,
- 		⟦10,'s',11⟧,
- 		⟦10,'e',11⟧,
- 		⟦11,')',29⟧,
- 		⟦5,'m',12⟧,
- 		⟦12,'(',13⟧,
- 		⟦13,'N',14⟧,
- 		⟦13,'v',14⟧,
- 		⟦13,'n',14⟧,
- 		⟦14,'N',14⟧,
- 		
- 		⟦14,',',31⟧,
- 		⟦31,'N',32⟧,
- 		⟦31,'n',32⟧,
- 		⟦31,'v',32⟧,
- 		⟦32,'N',32⟧,
- 		⟦32,'n',32⟧,
- 		⟦32,'v',32⟧,
- 		⟦32,')',29⟧,
- 		
- 		⟦14,'v',14⟧,
- 		⟦14,'n',14⟧,
- 		⟦14,')',29⟧,
- 		⟦5,'M',15⟧,
- 		⟦15,'(',16⟧,
- 		⟦16,'N',17⟧,
- 		⟦16,'v',17⟧,
- 		⟦16,'n',17⟧,
- 		⟦17,'N',17⟧,
- 		⟦17,'v',17⟧,
- 		⟦17,'n',17⟧,
- 		⟦17,',',18⟧,
- 		⟦18,'f',19⟧,
- 		⟦18,'r',19⟧,
- 		⟦18,'l',19⟧,
- 		⟦18,'b',19⟧,
- 		⟦19,')',29⟧,
- 		⟦5,'A',20⟧,
- 		⟦20,'(',21⟧,
- 		⟦21,'N',22⟧,
- 		⟦21,'v',22⟧,
- 		⟦22,'v',22⟧,
- 		⟦22,'N',22⟧,
- 		⟦22,'n',22⟧,
- 		⟦22,',',23⟧,
- 		⟦23,'n',23⟧,
- 		⟦23,'v',23⟧,
- 		⟦23,')',29⟧,
- 		⟦5,'P',24⟧,
- 		⟦5,'p',24⟧,
- 		⟦24,'(',25⟧,
- 		⟦25,'L',26⟧,
- 		⟦25,'C',26⟧,
- 		⟦26,',',27⟧,
- 		⟦27,'N',28⟧,
- 		⟦27,'v',28⟧,
- 		⟦27,'n',28⟧,
- 		⟦28,'N',28⟧,
- 		⟦28,'v',28⟧,
- 		⟦28,'n',28⟧,
- 		⟦28,')',29⟧
- 		⟧
-	M:=GNondeterministicAutomaton(Q,S,q,F,Δ)
-	return M
-end
-
 function createTransducer():ITransducer begin
 	
-Q:={"I","R","RO","ROB","ROBO","ROBOT","ROBOT_","ROBOT_R","V","VA","VAR","VARS","B",
-"BE","BEG","BEGI","BEGIN","E","EN","END","A","As","Ass","Assi","Assig","Assign","T","Tu","Tur","Turn",
-"M","Mo","Mov","Move","MoveD","MoveDi","MoveDir","F","Fa","Fac","Face","P","Pu","Put",
-"Pi","Pic","Pick","S","Sk","Ski","Skip","Num","Nombre","r","ri","rig","righ","right",
-"l","le","lef","left","a","ar","aro","arou","aroun","around","n","no","nor","nort","north","s","so",
-"sou","sout","south","w","we","wes","west","e","ea","eas","east","B","Ba","Bal","Ball","Ballo",
-"Balloo","Balloon","Balloons","C","Ch","Chi","Chip","Chips","b","ba","bac","back","f","fr",
-"fro","fron","front"}∪{"error"} 
+Q:={"I","K","E","o","f","s","S","T","P","q","R","N"}∪{"error"} 
 
 S:=('A'‥'Z')∪('a'‥'z')∪('0'‥'9')∪{'(',')',',','_',' ',';'}
-Out:=4
+Out:={"Cla", "Ext", "obj", "f", "s", "Pair", "Sup", "Th", "M", "R","N"}
 q:="I"
 F:={"I"}∪{"END"}
  
@@ -468,61 +362,34 @@ function h(q,σ) begin
 		
 		if q=="Error" then return s
 			
-		elseif σ∈{'(',')',' ',',','\n','\t',';'} then
+		elseif σ∈{'(',')',' ',',','\n','\t',';', '{', '}','=', ":=", '.'} then
 			if σ∉{' ','\n','\t'} then s:=String.valueOf(σ) end
 				
 			if q=="I" then return s
 				
-			elseif q=="ROBOT_R" then return "R"
+			elseif q=="K" then return "Cla"
 				
-			elseif q=="VARS" then return "V"
+			elseif q=="E" then return "Ext"
 				
-			elseif q=="BEGIN" then return "B"
+			elseif q=="o" then return "obj"+s
 				
-			elseif q=="Assign" then return "A"+s
+			elseif q=="f" then return "f"+s
 				
-			elseif q=="Move" then return "m"+s
+			elseif q=="s" then return "s"+s
 				
-			elseif q=="Turn" then return "t"+s
+			elseif q=="S" then return "Sup"+s
 				
-			elseif q=="Face" then return "F"+s
+			elseif q=="T" then return "Th"+s
 				
-			elseif q=="Put" then return "P"+s
+			elseif q=="P" then return "Pair"+s
 				
-			elseif q=="Pick" then return "p"+s
-			
-			elseif q=="MoveDir" then return "M"+s
+			elseif q=="q" then return "q"+s	
 				
-			elseif q=="END" then return "E"
+			elseif q=="N" then return "new"+s	
 				
-			elseif q=="Num" then return "n"+s
+			elseif q=="R" then return "Return"
 				
-			elseif q=="north" then return "o"+s
-				
-			elseif q=="south" then return "s"+s
-				
-			elseif q=="west" then return "w"+s
-				
-			elseif q=="east" then return "e"+s
-				
-			elseif q=="right" then return "r"+s
-				
-			elseif q=="left" then return "l"+s
-				
-			elseif q=="around" then return "a"+s
-				
-			elseif q=="back" then return "b"+s
-				
-			elseif q=="front" then return "f"+s
-				
-			elseif q=="Balloons" then return "L"+s
-				
-			elseif q=="Chips" then return "C"+s
-				
-			elseif q=="Skip" then return "K"+s
-				
-			elseif q=="Nombre" then return "N"+s
-				
+			elseif q=="N" then return "new"+s		
 				
 			else return "v"+s
 				

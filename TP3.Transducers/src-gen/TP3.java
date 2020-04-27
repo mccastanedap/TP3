@@ -100,11 +100,17 @@ public final class TP3 {
           $v5.add(GCollections.asList(x,y));
         }
       }
-      Object Q=$fix($opUnionY($opUnionY($opUnionY($opUnionY(GCollections.asSet("I","K","E","o","f","s","S","T","p","q","R","N","P","D","extends","super","parametros"),GCollections.asSet("ERROR","Init")),$v1),$v3),$v5));
+      gold.structures.set.ISet $v7=$newSet();
+      $v8:for (Object x:GCollections.singletonCollection('o')) {
+        for (Object y:GCollections.singletonCollection('s')) {
+          $v7.add(GCollections.asList(x,y));
+        }
+      }
+      Object Q=$fix($opUnionY($opUnionY($opUnionY($opUnionY($opUnionY(GCollections.asSet("I","K","E","o","f","s","S","T","p","q","R","N","P","D","extends","super","parametros"),GCollections.asSet("ERROR","Init")),$v1),$v3),$v5),$v7));
       $line=46;
       Object \u03A3=$fix($opUnionY($opUnionY($opUnionY($opIntvlY('A','Z'),$opIntvlY('a','z')),$opIntvlY('0','9')),GCollections.asSet('(',')',',','_',' ',';','=','{','}','.')));
       $line=47;
-      Object Out=$fix($opUnionY(GCollections.asSet('C','E','o','f','s','p','a','i','r','S','u','p','T','h','M','R','N','v','n','=',':','q','$',' ','{','}','.','(',')','P','D'),$opIntvlY('0','9')));
+      Object Out=$fix($opUnionY(GCollections.asSet('C','E','o','f','s','p','a','i','r','S','u','p','T','h','M','R','N','v','n','=',':','q','$',' ','{','}','.','(',')','P','D','$','#',','),$opIntvlY('0','9')));
       $line=49;
       Object q=$fix("Init");
       $line=50;
@@ -167,43 +173,59 @@ public final class TP3 {
                 }
                 else {
                   $line=62;
-                  if (($opEqualY(q,"parametros")&&$opEqualY(\u03C3,'o'))) {
+                  if (($opEqualY(q,"parametros")&&$opEqualY(\u03C3,' '))) {
                     $line=62;
                     $result=GCollections.asList('o','-');
                     if (true) break $try;
                   }
                   else {
                     $line=63;
-                    if ($opMembrY(\u03C3,$opUnionY(GCollections.asSet('(',')',' ','\n',',','\t',';','=','{','}','.','(',')'),$opIntvlY('0','9')))) {
+                    if ($opEqualY(q,"parametros")) {
                       $line=63;
-                      $result="Init";
+                      $result=GCollections.asList('o','-');
                       if (true) break $try;
                     }
                     else {
                       $line=64;
-                      if ($opEqualY(\u03C3,'E')) {
+                      if (($opEqualY(q,"parametros")&&$bool($opEqualY(\u03C3,')')))) {
                         $line=64;
-                        $result="extends";
+                        $result="Init";
                         if (true) break $try;
                       }
                       else {
                         $line=65;
-                        if ($opEqualY(\u03C3,'S')) {
+                        if ($opMembrY(\u03C3,$opUnionY(GCollections.asSet('(',')',' ','\n',',','\t',';','=','{','}','.','(',')'),$opIntvlY('0','9')))) {
                           $line=65;
-                          $result="super";
+                          $result="Init";
                           if (true) break $try;
                         }
                         else {
-                          $line=67;
-                          if (($bool(((((((((((((($opEqualY(q,"Init")||$opEqualY(q,"K"))||$opEqualY(q,"E"))||$opEqualY(q,"o"))||$opEqualY(q,"f"))||$opEqualY(q,"s"))||$opEqualY(q,"S"))||$opEqualY(q,"T"))||$opEqualY(q,"p"))||$opEqualY(q,"q"))||$opEqualY(q,"R"))||$opEqualY(q,"N"))||$opEqualY(q,"P"))||$opEqualY(q,"D")))&&$opMembrY(\u03C3,GCollections.asSet('I','K','o','f','s','S','T','p','q','R','N','P')))) {
-                            $line=69;
-                            $result=$opAdditY(\u03C3,"");
+                          $line=66;
+                          if ($opEqualY(\u03C3,'E')) {
+                            $line=66;
+                            $result="extends";
                             if (true) break $try;
                           }
                           else {
-                            $line=72;
-                            $result="ERROR";
-                            if (true) break $try;
+                            $line=67;
+                            if ($opEqualY(\u03C3,'S')) {
+                              $line=67;
+                              $result="super";
+                              if (true) break $try;
+                            }
+                            else {
+                              $line=69;
+                              if (($bool(((((((((((((($opEqualY(q,"Init")||$opEqualY(q,"K"))||$opEqualY(q,"E"))||$opEqualY(q,"o"))||$opEqualY(q,"f"))||$opEqualY(q,"s"))||$opEqualY(q,"S"))||$opEqualY(q,"T"))||$opEqualY(q,"p"))||$opEqualY(q,"q"))||$opEqualY(q,"R"))||$opEqualY(q,"N"))||$opEqualY(q,"P"))||$opEqualY(q,"D")))&&$opMembrY(\u03C3,GCollections.asSet('I','K','o','f','s','S','T','p','q','R','N','P')))) {
+                                $line=71;
+                                $result=$opAdditY(\u03C3,"");
+                                if (true) break $try;
+                              }
+                              else {
+                                $line=74;
+                                $result="ERROR";
+                                if (true) break $try;
+                              }
+                            }
                           }
                         }
                       }
@@ -215,7 +237,7 @@ public final class TP3 {
           }
         }
       }
-      $line=76;
+      $line=78;
       $rethrow(new RuntimeException("The function \"\u03B4(q:Object,\u03C3:Object)\" did not return a value."));
     }
     catch (Throwable $throwable) {
@@ -223,41 +245,57 @@ public final class TP3 {
     }
     return $result;
   }
-  public static Object \u03B4(java.lang.Iterable $v7, Object \u03C3) {
+  public static Object \u03B4(java.lang.Iterable $v9, Object \u03C3) {
     int $line=0;
     Object $result=null;
     $try:try {
-      java.util.Iterator $v8=GCollections.unmodifiableCollection($v7).iterator();
-      Object x=$v8.next();
-      Object y=$v8.next();
-      $line=79;
+      java.util.Iterator $v10=GCollections.unmodifiableCollection($v9).iterator();
+      Object x=$v10.next();
+      Object y=$v10.next();
+      $line=81;
       if ($opEqualY(\u03C3,',')) {
-        $line=79;
+        $line=81;
         $result="parametros";
         if (true) break $try;
       }
       else {
-        $line=80;
-        if ($opEqualY(GCollections.asList(x,y),GCollections.asList('o','-'))) {
-          $line=80;
-          $result='=';
+        $line=82;
+        if (($opEqualY(y,'-')&&$opEqualY(\u03C3,' '))) {
+          $line=82;
+          $result=GCollections.asList(x,y);
           if (true) break $try;
         }
         else {
-          $line=81;
-          if (($opEqualY(GCollections.asList(x,y),GCollections.asList('o','-'))&&!$opMembrY(\u03C3,$opUnionY($opUnionY(GCollections.asSet('\n','\t','=','_',' ',':',';','(',')','{','}','.'),$opIntvlY('0','9')),$opIntvlY('A','Z'))))) {
-            $line=81;
+          $line=83;
+          if (($opEqualY(y,'-')&&!$opMembrY(\u03C3,$opUnionY($opUnionY(GCollections.asSet('\n','\t','=','_',' ',':',';','(',')','{','}','.',','),$opIntvlY('0','9')),$opIntvlY('A','Z'))))) {
+            $line=83;
             $result=GCollections.asList(x,\u03C3);
             if (true) break $try;
           }
           else {
-            $line=84;
-            $result="ERROR";
-            if (true) break $try;
+            $line=85;
+            if (($opEqualY(y,'-')&&$opEqualY(\u03C3,' '))) {
+              $line=85;
+              $result=GCollections.asList(x,y);
+              if (true) break $try;
+            }
+            else {
+              $line=86;
+              if ($opEqualY(\u03C3,')')) {
+                $line=86;
+                $result="Init";
+                if (true) break $try;
+              }
+              else {
+                $line=87;
+                $result="ERROR";
+                if (true) break $try;
+              }
+            }
           }
         }
       }
-      $line=86;
+      $line=89;
       $rethrow(new RuntimeException("The function \"\u03B4(\u27E8x,y\u27E9:java.lang.Iterable,\u03C3:Object)\" did not return a value."));
     }
     catch (Throwable $throwable) {
@@ -269,30 +307,38 @@ public final class TP3 {
     int $line=0;
     Object $result=null;
     $try:try {
-      $line=90;
+      $line=93;
       if ($bool($opEqualY(q,"o"))) {
-        $line=90;
+        $line=93;
         $result='D';
         if (true) break $try;
       }
-      $line=92;
+      $line=95;
       if ($opEqualY(q,"extends")) {
-        $line=92;
+        $line=95;
         $result="";
         if (true) break $try;
       }
       else {
-        $line=93;
+        $line=96;
         if ($opEqualY(q,"super")) {
-          $line=93;
+          $line=96;
           $result="";
           if (true) break $try;
         }
+        else {
+          $line=97;
+          if ($opEqualY(q,"parametros")) {
+            $line=97;
+            $result="";
+            if (true) break $try;
+          }
+        }
       }
-      $line=96;
+      $line=99;
       $result="";
       if (true) break $try;
-      $line=97;
+      $line=100;
       $rethrow(new RuntimeException("The function \"g(q:Object)\" did not return a value."));
     }
     catch (Throwable $throwable) {
@@ -300,25 +346,57 @@ public final class TP3 {
     }
     return $result;
   }
-  public static Object h(java.lang.Iterable $v9, Object \u03C3) {
+  public static Object h(java.lang.Iterable $v11, Object \u03C3) {
     int $line=0;
     Object $result=null;
     $try:try {
-      java.util.Iterator $v10=GCollections.unmodifiableCollection($v9).iterator();
-      Object x=$v10.next();
-      Object y=$v10.next();
-      $line=99;
+      java.util.Iterator $v12=GCollections.unmodifiableCollection($v11).iterator();
+      Object x=$v12.next();
+      Object y=$v12.next();
+      $line=102;
       if ($opEqualY(\u03C3,')')) {
-        $line=99;
+        $line=102;
         $result=')';
         if (true) break $try;
       }
       else {
-        $line=102;
-        $result="";
-        if (true) break $try;
+        $line=103;
+        if ($opEqualY(\u03C3,',')) {
+          $line=103;
+          $result=',';
+          if (true) break $try;
+        }
+        else {
+          $line=104;
+          if (($opEqualY(y,'-')&&$opEqualY(\u03C3,' '))) {
+            $line=104;
+            $result=' ';
+            if (true) break $try;
+          }
+          else {
+            $line=105;
+            if ($opEqualY(y,'-')) {
+              $line=105;
+              $result="";
+              if (true) break $try;
+            }
+            else {
+              $line=107;
+              if ($opMembrY(x,GCollections.asSet('C','E','o','f','s','p','a','i','r','S','u','p','T','h','M','R','N','v','n','q'))) {
+                $line=107;
+                $result=$invokeMethod(String.class,"valueOf",true,null,new Object[]{' '});
+                if (true) break $try;
+              }
+              else {
+                $line=108;
+                $result=' ';
+                if (true) break $try;
+              }
+            }
+          }
+        }
       }
-      $line=105;
+      $line=110;
       $rethrow(new RuntimeException("The function \"h(\u27E8x,y\u27E9:java.lang.Iterable,\u03C3:Object)\" did not return a value."));
     }
     catch (Throwable $throwable) {
@@ -326,25 +404,33 @@ public final class TP3 {
     }
     return $result;
   }
-  public static Object g(java.lang.Iterable $v11) {
+  public static Object g(java.lang.Iterable $v13) {
     int $line=0;
     Object $result=null;
     $try:try {
-      java.util.Iterator $v12=GCollections.unmodifiableCollection($v11).iterator();
-      Object x=$v12.next();
-      Object y=$v12.next();
-      $line=108;
-      if (!$opEqualY(y,'-')) {
-        $line=108;
-        $result=$opAdditY(y,x);
-        if (true) break $try;
-      }
-      else {
-        $line=110;
+      java.util.Iterator $v14=GCollections.unmodifiableCollection($v13).iterator();
+      Object x=$v14.next();
+      Object y=$v14.next();
+      $line=114;
+      if ($opEqualY(y,'-')) {
+        $line=114;
         $result="";
         if (true) break $try;
       }
-      $line=113;
+      else {
+        $line=116;
+        if (($opEqualY(y,'f')||$opEqualY(y,'s'))) {
+          $line=116;
+          $result=y;
+          if (true) break $try;
+        }
+        else {
+          $line=118;
+          $result="";
+          if (true) break $try;
+        }
+      }
+      $line=122;
       $rethrow(new RuntimeException("The function \"g(\u27E8x,y\u27E9:java.lang.Iterable)\" did not return a value."));
     }
     catch (Throwable $throwable) {
@@ -356,155 +442,155 @@ public final class TP3 {
     int $line=0;
     Object $result=null;
     $try:try {
-      $line=116;
+      $line=125;
       String s=null;
       s=$defaultValue(String.class);
-      $line=117;
+      $line=126;
       s=$cast(String.class,$fix(""));
-      $line=119;
+      $line=128;
       if ($opEqualY(q,"ERROR")) {
-        $line=119;
+        $line=128;
         $result="$";
         if (true) break $try;
       }
       else {
-        $line=122;
+        $line=131;
         if ($opMembrY(\u03C3,$opUnionY(GCollections.asSet(' ',',','\n','\t',';',':',' ','=','{','}','.','(',')'),$opIntvlY('0','9')))) {
-          $line=123;
+          $line=132;
           if (!$opMembrY(\u03C3,GCollections.asSet('\n','\t'))) {
-            $line=123;
+            $line=132;
             s=$cast(String.class,$fix($invokeMethod(String.class,"valueOf",true,null,new Object[]{\u03C3})));
           }
-          $line=125;
+          $line=134;
           if (($opEqualY(\u03C3,',')||$opEqualY(\u03C3,';'))) {
-            $line=125;
+            $line=134;
             s=$cast(String.class,$fix(""));
           }
-          $line=127;
+          $line=136;
           if ($opEqualY(\u03C3,' ')) {
-            $line=127;
+            $line=136;
             s=$cast(String.class,$fix(' '));
           }
-          $line=129;
+          $line=138;
           if ($opEqualY(q,"Init")) {
-            $line=129;
+            $line=138;
             $result=s;
             if (true) break $try;
           }
           else {
-            $line=131;
+            $line=140;
             if ($opEqualY(q,"K")) {
-              $line=131;
+              $line=140;
               $result=$opAdditY('C',s);
               if (true) break $try;
             }
             else {
-              $line=134;
+              $line=143;
               if ($opEqualY(q,"E")) {
-                $line=134;
+                $line=143;
                 $result=$opAdditY('E',s);
                 if (true) break $try;
               }
               else {
-                $line=136;
+                $line=145;
                 if ($opEqualY(q,"o")) {
-                  $line=136;
+                  $line=145;
                   $result=s;
                   if (true) break $try;
                 }
                 else {
-                  $line=140;
+                  $line=149;
                   if ($opEqualY(q,"f")) {
-                    $line=140;
+                    $line=149;
                     $result=$opAdditY('f',s);
                     if (true) break $try;
                   }
                   else {
-                    $line=142;
+                    $line=151;
                     if ($opEqualY(q,"s")) {
-                      $line=142;
+                      $line=151;
                       $result=$opAdditY('s',s);
                       if (true) break $try;
                     }
                     else {
-                      $line=144;
+                      $line=153;
                       if ($opEqualY(q,"S")) {
-                        $line=144;
+                        $line=153;
                         $result=$opAdditY('S',s);
                         if (true) break $try;
                       }
                       else {
-                        $line=146;
+                        $line=155;
                         if ($opEqualY(q,"T")) {
-                          $line=146;
+                          $line=155;
                           $result=$opAdditY('T',s);
                           if (true) break $try;
                         }
                         else {
-                          $line=148;
+                          $line=157;
                           if ($opEqualY(q,"p")) {
-                            $line=148;
+                            $line=157;
                             $result=$opAdditY('p',s);
                             if (true) break $try;
                           }
                           else {
-                            $line=150;
+                            $line=159;
                             if ($opEqualY(q,"P")) {
-                              $line=150;
+                              $line=159;
                               $result=$opAdditY('p',s);
                               if (true) break $try;
                             }
                             else {
-                              $line=152;
+                              $line=161;
                               if ($opEqualY(q,"q")) {
-                                $line=152;
+                                $line=161;
                                 $result=$opAdditY('q',s);
                                 if (true) break $try;
                               }
                               else {
-                                $line=154;
+                                $line=163;
                                 if ($opEqualY(q,"N")) {
-                                  $line=154;
+                                  $line=163;
                                   $result=$opAdditY('n',s);
                                   if (true) break $try;
                                 }
                                 else {
-                                  $line=156;
+                                  $line=165;
                                   if ($opEqualY(q,"R")) {
-                                    $line=156;
+                                    $line=165;
                                     $result=$opAdditY('R',s);
                                     if (true) break $try;
                                   }
                                   else {
-                                    $line=158;
+                                    $line=167;
                                     if (($opEqualY(q,"extends")&&$opEqualY(\u03C3,'{'))) {
-                                      $line=158;
+                                      $line=167;
                                       $result='{';
                                       if (true) break $try;
                                     }
                                     else {
-                                      $line=159;
+                                      $line=168;
                                       if ($opEqualY(q,"extends")) {
-                                        $line=159;
+                                        $line=168;
                                         $result="";
                                         if (true) break $try;
                                       }
                                       else {
-                                        $line=160;
+                                        $line=169;
                                         if ($opEqualY(q,"super")) {
-                                          $line=160;
+                                          $line=169;
                                           $result="";
                                           if (true) break $try;
                                         }
                                         else {
-                                          $line=161;
+                                          $line=170;
                                           if ($opEqualY(q,"parametros")) {
-                                            $line=161;
+                                            $line=170;
                                             $result="";
                                             if (true) break $try;
                                           }
                                           else {
-                                            $line=164;
+                                            $line=173;
                                             $result=$opAdditY('v',s);
                                             if (true) break $try;
                                           }
@@ -526,12 +612,12 @@ public final class TP3 {
           }
         }
         else {
-          $line=168;
+          $line=177;
           $result="";
           if (true) break $try;
         }
       }
-      $line=171;
+      $line=180;
       $rethrow(new RuntimeException("The function \"h(q:Object,\u03C3:Object)\" did not return a value."));
     }
     catch (Throwable $throwable) {

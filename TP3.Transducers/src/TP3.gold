@@ -41,10 +41,10 @@ var names
 function createTransducer():ITransducer begin
 	// Lexer: reads a string with lower casae letters, digits, parenthesis, and spaces.
 	// outputs a string of {'(',')','+','*','v','n'}
-Q:={"I","K","E","o","f","s","S","T","p","q","R","N", "P", "D" ,"extends", "super", "parametros"}∪{"ERROR", "Init"}∪{⟨x,y⟩|x ∈ ('a'‥'z'),y ∈ ('a'‥'z')}∪{⟨x,y⟩|x='o',y='-'}∪{⟨x,y⟩|x='o',y='f'}
+Q:={"I","K","E","o","f","s","S","T","p","q","R","N", "P", "D" ,"extends", "super", "parametros"}∪{"ERROR", "Init"}∪{⟨x,y⟩|x ∈ ('a'‥'z'),y ∈ ('a'‥'z')}∪{⟨x,y⟩|x='o',y='-'}∪{⟨x,y⟩|x='o',y='f'}∪{⟨x,y⟩|x='o',y='s'}
 
 Σ:=('A'‥'Z')∪('a'‥'z')∪('0'‥'9')∪{'(',')',',','_',' ',';', '=', '{', '}', '.'}
-Out:={'C', 'E', 'o', 'f', 's', 'p','a','i','r', 'S','u','p', 'T','h', 'M', 'R','N', 'v','n', '=',':','q', '$', ' ', '{', '}', '.', '(', ')', 'P', 'D'} 
+Out:={'C', 'E', 'o', 'f', 's', 'p','a','i','r', 'S','u','p', 'T','h', 'M', 'R','N', 'v','n', '=',':','q', '$', ' ', '{', '}', '.', '(', ')', 'P', 'D', '$', '#' ,','}
 ∪('0'‥'9')
 q:="Init"
 F:={"Init"}∪{"ERROR"}
@@ -59,7 +59,9 @@ function δ(q,σ) begin
 	elseif q="super" and σ!=')'  then return "super"
 	elseif q="super" and σ==')'  then return "Init"
 	elseif σ=='(' then return "parametros" 
-	elseif q="parametros" and σ=='o'  then return ⟨'o','-'⟩
+	elseif q="parametros" and σ==' ' then return ⟨'o','-'⟩
+	elseif q="parametros" then return ⟨'o','-'⟩
+	elseif q="parametros" and (σ==')') then return "Init"
 	elseif  σ ∈ {'(',')',' ', '\n' , ',' , '\t' , ';', '=', '{', '}', '.', '(', ')' } ∪('0'‥'9') then return "Init"
 	elseif σ=='E' then return "extends"
 	elseif σ=='S' then return "super"
@@ -77,10 +79,11 @@ end
 
 function δ(⟨x,y⟩,σ) begin
 	if σ==',' then return "parametros"
-	elseif ⟨x,y⟩==⟨'o','-'⟩ then return '='
-	elseif ⟨x,y⟩==⟨'o','-'⟩ and σ∉{'\n','\t','=', '_',' ', ':', ';','(', ')', '{', '}', '.' }∪('0'‥'9')∪('A'‥'Z') then return ⟨x,σ⟩
+	elseif y=='-' and σ==' ' then return ⟨x,y⟩
+	elseif y=='-'and σ∉{'\n','\t','=', '_',' ', ':', ';','(', ')', '{', '}', '.', ',' }∪('0'‥'9')∪('A'‥'Z') then return ⟨x,σ⟩
 	//elseif σ==')'then return "Init"
-	
+	elseif y=='-' and σ==' ' then return ⟨x,y⟩
+	elseif σ==')' then return "Init"
 	else return "ERROR"
 	end
 end
@@ -91,25 +94,31 @@ function g(q) begin
 		
 	if q=="extends"  then return λ
 	elseif q=="super" then return λ
-	//elseif q=="parametros" then return '('
+	elseif q=="parametros" then return λ
 	end
 	return λ
 end
 function h(⟨x,y⟩,σ) begin
 	if σ==')' then return ')'
+	elseif σ==',' then return ','
+	elseif y=='-' and σ=' ' then return ' '
+	elseif y=='-' then return λ
 		
-		
-	else return λ
-		
+	elseif x∈{'C', 'E', 'o', 'f', 's', 'p','a','i','r', 'S','u','p', 'T','h', 'M', 'R','N', 'v','n','q'} then return String.valueOf(' ')
+	else return ' '
 	end
 end
 
 function g(⟨x,y⟩) begin
-	if y!='-' then return y+x
+
+	if y=='-' then return λ
 		
-	else return  λ
+	elseif y=='f' or y=='s' then return  y
+	
+	else return λ
 		
 	end
+//	return '#'
 end
 
 function h(q,σ) begin
@@ -125,7 +134,7 @@ function h(q,σ) begin
 			if σ==',' or σ==';' then s:= λ end
 			
 			if σ==' ' then s:= ' ' end
-			
+
 			if q=="Init" then return s
 				
 			elseif q=="K" then return 'C'+s
